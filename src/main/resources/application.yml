@@ -1,6 +1,9 @@
 server:
   port: 8082
 
+org.jobrunr:
+  dashboard.enabled: true
+  background-job-server.enabled: true
 spring:
   h2:
     console:
@@ -23,12 +26,6 @@ spring:
             non_contextual_creation: true
     show-sql: true
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
       group-id: nss
-#      topic: news
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: com.codingsaint.learning.kafkastreamspring.ByteDeserializer
-    producer:
-#      topic: news
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: com.codingsaint.learning.kafkastreamspring.ByteSerializer
