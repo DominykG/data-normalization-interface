@@ -9,7 +9,7 @@ option java_outer_classname = "NewsArticleProto";
 
 message Article {
 
-  Source source = 1;
+  string source_name = 1;
   string author = 2;
   string title = 3;
   string description = 4;
@@ -17,12 +17,5 @@ message Article {
   string image_url = 6;
   google.protobuf.Timestamp date_publish = 7;
   string content = 8;
-
-}
-
-message Source {
-
-  string id = 1;
-  string name = 2;
 
 }

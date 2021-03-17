@@ -2,34 +2,54 @@ package com.bachelors.dni.producers.newsapi.normalization;
 
 import com.bachelors.dni.producers.newsapi.models.NewsApiArticle;
 import com.bachelors.dni.protobuf.NewsArticleProto.Article;
-import com.bachelors.dni.protobuf.NewsArticleProto.Source;
 import com.google.protobuf.Timestamp;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
 
 @Log4j2
 public class NewsApiNormalization {
 
-    public static Article normalizeNewsApi(NewsApiArticle response) {
-        return Article.newBuilder()
-                .setSource(Source.newBuilder()
-                        .setId(response.getSource().getId())
-                        .setName(response.getSource().getName())
-                        .build())
-                .setAuthor(response.getAuthor())
-                .setTitle(response.getTitle())
-                .setDescription(response.getDescription())
-                .setUrl(response.getUrl())
-                .setImageUrl(response.getUrlToImage())
-                .setDatePublish(stringToTimestamp(response.getPublishedAt()) )
-                .setContent(response.getContent())
-                .build();
+    public static Set<Article> normalizeNewsApi(Set<NewsApiArticle> articles) {
+
+        Set<Article> normalizedArticles = new HashSet<>();
+
+        for (var article : articles) {
+            normalizedArticles.add(Article.newBuilder()
+                    .setSourceName(article.getSource().getName())
+                    .setAuthor(article.getAuthor() == null ? "No Author Specified" : article.getAuthor())
+                    .setTitle(article.getTitle())
+                    .setDescription(article.getDescription())
+                    .setUrl(article.getUrl())
+                    .setImageUrl(article.getUrlToImage())
+                    .setDatePublish(stringToTimestamp(article.getPublishedAt()) )
+                    .setContent(article.getContent() == null ? "No Content Specified" : generateContent(article.getContent()))
+                    .build());
+        }
+
+        log.info(normalizedArticles);
+
+        return normalizedArticles;
     }
 
-    private static Timestamp stringToTimestamp(String date) {
+    static String generateContent(String rawContent) {
+        try {
+            int numberOfCharacterToGenerate = Integer.parseInt(rawContent.substring(rawContent.indexOf("[+") + 1, rawContent.indexOf(" chars]")));
+            String generatedString = RandomStringUtils.randomAscii(numberOfCharacterToGenerate);
+            return rawContent.replaceAll("\r\n", " ")
+                    .replaceFirst("... \\[\\+[0-9]+ (chars)\\]", Matcher.quoteReplacement(generatedString));
+        } catch (Exception e) {
+            return rawContent;
+        }
+    }
+
+    static Timestamp stringToTimestamp(String date) {
         return Timestamp.newBuilder()
-                .setSeconds(LocalDateTime.parse(date).getSecond())
+                .setSeconds(LocalDateTime.parse(date.substring(0, date.length()-1)).getSecond())
                 .build();
     }
 
