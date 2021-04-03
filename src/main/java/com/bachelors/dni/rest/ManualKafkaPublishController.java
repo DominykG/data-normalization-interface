@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.bachelors.dni.jobs.KafkaProducerJob.job;
 
 @RestController
-public class KafkaNewsController {
+public class ManualKafkaPublishController {
 
-    @GetMapping("/publush")
-    private String publish() {
+    @GetMapping("/publish")
+    private String publishManually() {
         job();
         return "OK";
     }

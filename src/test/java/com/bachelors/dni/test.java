@@ -21,7 +21,7 @@ public class test {
             "&sortBy=publishedAt" +
             "&apiKey=d7185b744f324f46a9df10b87e556ee6";
 
-    public String CONTENT = "One of the strictest crackdowns worldwide\r\nPhoto by Michele Doying / The Verge\r\nIndia is reportedly moving forward with a sweeping ban on cryptocurrencies. According to Reuters, the countrys legislat… [+155 chars]";
+    public String CONTENT = "One of the strictest crackdowns worldwide\r\nPhoto by Michele Doying / The Verge\r\nIndia is reportedly moving forward with a sweeping ban on cryptocurrencies. According to Reuters, the countrys legislat… [+15555 chars]";
 
 
     @Test
