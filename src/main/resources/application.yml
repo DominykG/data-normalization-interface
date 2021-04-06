@@ -1,9 +1,6 @@
 server:
   port: 8082
 
-org.jobrunr:
-  dashboard.enabled: true
-  background-job-server.enabled: true
 spring:
   h2:
     console:
