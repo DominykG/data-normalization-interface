@@ -1,6 +1,6 @@
-package com.bachelors.dni.db.repositories;
+package com.bachelors.nni.database.repositories;
 
-import com.bachelors.dni.db.models.Source;
+import com.bachelors.nni.database.models.Source;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

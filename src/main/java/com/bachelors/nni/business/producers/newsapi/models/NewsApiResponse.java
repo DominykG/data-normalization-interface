@@ -1,4 +1,4 @@
-package com.bachelors.dni.producers.newsapi.models;
+package com.bachelors.nni.business.producers.newsapi.models;
 
 import lombok.*;
 

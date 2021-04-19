@@ -1,4 +1,4 @@
-package com.bachelors.dni.db.models;
+package com.bachelors.nni.database.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -36,4 +36,13 @@ public class Client implements Serializable {
     )
     @JsonManagedReference
     private Set<Source> sources = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "CLIENT_RSS",
+            joinColumns = { @JoinColumn(name = "CLIENT_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "RSS_ID") }
+    )
+    @JsonManagedReference
+    private Set<RssFeed> rssFeeds = new HashSet<>();
 }

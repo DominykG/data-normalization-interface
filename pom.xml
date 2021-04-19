@@ -9,15 +9,27 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bachelors</groupId>
-	<artifactId>dni</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>dni</name>
-	<description>Data Normalization interface for NSS</description>
+	<artifactId>nni</artifactId>
+	<version>1.0.0</version>
+	<name>News Normalization Interface</name>
+	<description>News Normalization Interface for NSS</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<!-- 	TODO: sort dependencies	-->
+
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>https://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+		<dependency>
+			<groupId>com.apptastic</groupId>
+			<artifactId>rssreader</artifactId>
+			<version>2.5.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -36,7 +48,18 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>2.4.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.15</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
@@ -74,6 +97,17 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jobrunr/jobrunr -->
+		<dependency>
+			<groupId>org.jobrunr</groupId>
+			<artifactId>jobrunr</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.daniel-shuy</groupId>
+			<artifactId>kafka-protobuf-serde</artifactId>
+			<version>2.2.0</version>
 		</dependency>
 	</dependencies>
 

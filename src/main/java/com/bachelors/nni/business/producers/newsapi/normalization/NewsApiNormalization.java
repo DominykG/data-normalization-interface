@@ -1,12 +1,13 @@
-package com.bachelors.dni.producers.newsapi.normalization;
+package com.bachelors.nni.business.producers.newsapi.normalization;
 
-import com.bachelors.dni.producers.newsapi.models.NewsApiArticle;
-import com.bachelors.dni.protobuf.NewsArticleProto.Article;
+import com.bachelors.nni.business.producers.newsapi.models.NewsApiArticle;
+import com.bachelors.nni.protobuf.NewsArticleProto.Article;
 import com.google.protobuf.Timestamp;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -19,19 +20,20 @@ public class NewsApiNormalization {
         Set<Article> normalizedArticles = new HashSet<>();
 
         for (var article : articles) {
-            normalizedArticles.add(Article.newBuilder()
+            Article articleToAdd = Article.newBuilder()
                     .setSourceName(article.getSource().getName())
                     .setAuthor(article.getAuthor() == null ? "No Author Specified" : article.getAuthor())
                     .setTitle(article.getTitle())
                     .setDescription(article.getDescription())
                     .setUrl(article.getUrl())
-                    .setImageUrl(article.getUrlToImage())
+                    .setImageUrl(article.getUrlToImage() == null ? "No Image" : article.getUrlToImage())
                     .setDatePublish(stringToTimestamp(article.getPublishedAt()) )
                     .setContent(article.getContent() == null ? "No Content Specified" : generateContent(article.getContent()))
-                    .build());
+                    .build();
+            normalizedArticles.add(articleToAdd);
         }
 
-        log.info(normalizedArticles);
+        //log.info(normalizedArticles);
 
         return normalizedArticles;
     }
@@ -49,7 +51,7 @@ public class NewsApiNormalization {
 
     static Timestamp stringToTimestamp(String date) {
         return Timestamp.newBuilder()
-                .setSeconds(LocalDateTime.parse(date.substring(0, date.length()-1)).getSecond())
+                .setSeconds(LocalDateTime.parse(date.substring(0, date.length()-1)).toEpochSecond(ZoneOffset.UTC))
                 .build();
     }
 

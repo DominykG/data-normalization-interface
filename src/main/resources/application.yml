@@ -1,6 +1,13 @@
 server:
   port: 8082
 
+org.jobrunr:
+  dashboard.enabled: true
+  background-job-server.enabled: true
+
+#newsapi:
+#  api-key: d7185b744f324f46a9df10b87e556ee6
+
 spring:
   h2:
     console:
@@ -24,5 +31,3 @@ spring:
     show-sql: true
   kafka:
     bootstrap-servers: localhost:9092
-    consumer:
-      group-id: nss

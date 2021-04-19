@@ -1,4 +1,4 @@
-package com.bachelors.dni.db.models;
+package com.bachelors.nni.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;

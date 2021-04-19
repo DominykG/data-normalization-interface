@@ -1,4 +1,4 @@
-package com.bachelors.dni.kafka.config;
+package com.bachelors.nni.business.kafka.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.ByteArraySerializer;

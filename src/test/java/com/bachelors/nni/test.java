@@ -1,16 +1,12 @@
-package com.bachelors.dni;
+package com.bachelors.nni;
 
-import com.bachelors.dni.producers.newsapi.models.NewsApiResponse;
-import com.bachelors.dni.protobuf.NewsArticleProto.Article;
+import com.bachelors.nni.business.producers.newsapi.models.NewsApiResponse;
 import com.google.gson.Gson;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 
 @Log4j2

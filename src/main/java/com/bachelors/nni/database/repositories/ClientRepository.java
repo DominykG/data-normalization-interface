@@ -1,10 +1,8 @@
-package com.bachelors.dni.db.repositories;
+package com.bachelors.nni.database.repositories;
 
-import com.bachelors.dni.db.models.Client;
+import com.bachelors.nni.database.models.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, String> {
