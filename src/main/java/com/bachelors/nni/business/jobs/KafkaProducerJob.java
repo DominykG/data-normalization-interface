@@ -8,6 +8,11 @@ import com.bachelors.nni.database.repositories.ClientRepository;
 import com.bachelors.nni.protobuf.NewsArticleProto.Article;
 import com.google.gson.Gson;
 import lombok.extern.log4j.Log4j2;
+import org.jobrunr.jobs.lambdas.JobLambda;
+import org.jobrunr.scheduling.BackgroundJob;
+import org.jobrunr.scheduling.cron.Cron;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.bachelors.nni.business.producers.newsapi.normalization.NewsApiNormalization.normalizeNewsApi;
-import static com.bachelors.nni.business.producers.rss.reader.RssFeedNormalization.normalizeRssFeeds;
+import static com.bachelors.nni.business.producers.rss.normalization.RssFeedNormalization.normalizeRssFeeds;
 
 @Log4j2
 @Component
@@ -38,16 +43,8 @@ public class KafkaProducerJob {
         KafkaProducerJob.clientRepository = clientRepository;
     }
 
-//    @Bean
-//    public static void scheduleKafkaJobForTopic() {
-//        jobScheduler.scheduleRecurrently(
-//                "news-api-daily-job",
-//                job(),
-//                Cron.daily(18, 00)
-//        );
-//    }
-
     public static void job() {
+        log.info("Started job");
         getClients().forEach(
                 (client) -> publishArticlesToKafka(
                         client.getAssignedKafkaTopic(),
@@ -103,7 +100,8 @@ public class KafkaProducerJob {
     }
 
     private static void publishArticlesToKafka(String topic, Set<Article> articles) {
-        articles.forEach( (article) -> kafkaProducer.send(topic, article));
+        articles.forEach( (art) -> log.info(art.getContent()));
+        articles.forEach( (article) -> kafkaProducer.send(topic, article.toByteArray()));
     }
 
 }

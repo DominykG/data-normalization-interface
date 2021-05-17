@@ -28,7 +28,7 @@ public class Client implements Serializable {
     @Column(name = "C_QUERY", nullable = false, updatable = false)
     private String query;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "CLIENT_SOURCE",
             joinColumns = { @JoinColumn(name = "CLIENT_ID") },
@@ -37,7 +37,7 @@ public class Client implements Serializable {
     @JsonManagedReference
     private Set<Source> sources = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "CLIENT_RSS",
             joinColumns = { @JoinColumn(name = "CLIENT_ID") },

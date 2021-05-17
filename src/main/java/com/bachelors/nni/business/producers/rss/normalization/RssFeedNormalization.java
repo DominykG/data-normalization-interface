@@ -1,4 +1,4 @@
-package com.bachelors.nni.business.producers.rss.reader;
+package com.bachelors.nni.business.producers.rss.normalization;
 
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
@@ -43,10 +43,6 @@ public class RssFeedNormalization {
                         .build()
                 );
             }
-        }
-
-        for (Article article : normalizedArticles) {
-            log.info(article.toString());
         }
 
         return normalizedArticles;
